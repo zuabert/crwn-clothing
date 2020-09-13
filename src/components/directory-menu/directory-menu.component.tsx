@@ -52,8 +52,8 @@ interface DirectoryMenuState {
 class DirectoryMenu extends React.Component<any> {
     state: DirectoryMenuState;
 
-    constructor() {
-        super({});
+    constructor(props: Readonly<any>) {
+        super(props);
 
         this.state = {
             sections
@@ -64,8 +64,10 @@ class DirectoryMenu extends React.Component<any> {
         return (
             <div className="directory-menu">
                 {
-                    this.state.sections.map(({ title, imageUrl, id, size }) => (
-                        <MenuItem title={title} imageUrl={imageUrl} id={id} size={size}></MenuItem>
+                    this.state.sections.map(({ id, ...otherSectionProps }) => (
+                        <MenuItem
+                            key={id}
+                            {...otherSectionProps}></MenuItem>
                     ))
                 }
             </div>
